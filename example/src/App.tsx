@@ -1,19 +1,13 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text } from 'react-native';
-import BookingCalendar from 'react-native-booking-calendar';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { BookingCalendar } from 'react-native-booking-calendar';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
-  React.useEffect(() => {
-    BookingCalendar.multiply(3, 7).then(setResult);
-  }, []);
-
   return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <BookingCalendar />
+    </SafeAreaView>
   );
 }
 
