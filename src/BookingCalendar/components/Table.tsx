@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
+
+const { width: windowWidth } = Dimensions.get('window');
 
 interface TableProps {}
 const Table: React.FC<TableProps> = ({ children }) => {
@@ -7,7 +9,9 @@ const Table: React.FC<TableProps> = ({ children }) => {
 };
 
 const TableStyle = StyleSheet.create({
-  wrapper: {},
+  wrapper: {
+    width: windowWidth,
+  },
 });
 
 export default Table;

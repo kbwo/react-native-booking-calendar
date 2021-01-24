@@ -1,13 +1,21 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native';
+import Date from './components/Date';
+import Row from './components/Row';
+import Table from './components/Table';
+import Time from './components/Time';
 
 interface BookingCalendarProps {}
 
 const BookingCalendar: React.FC<BookingCalendarProps> = () => {
   return (
-    <View>
-      <Text>this is booking calendar UI component</Text>
-    </View>
+    <ScrollView>
+      <Table>
+        <Date />
+        <Time />
+        <Row />
+      </Table>
+    </ScrollView>
   );
 };
 
