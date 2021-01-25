@@ -1,6 +1,5 @@
 import type { DateTime } from 'luxon';
 import React, { ReactNode } from 'react';
-import { ScrollView } from 'react-native';
 import Date from './components/Date';
 import Table from './components/Table';
 
@@ -28,20 +27,18 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
   onButtonPress,
 }) => {
   return (
-    <ScrollView>
-      <Table>
-        <Date
-          startDate={startDate}
-          startHour={startHour}
-          startMinute={startMinute}
-          endHour={endHour}
-          endMinute={endMinute}
-          intervalMinutes={intervalMinutes}
-          dateTime={dateTime}
-          onButtonPress={onButtonPress}
-        />
-      </Table>
-    </ScrollView>
+    <Table>
+      <Date
+        startDate={startDate}
+        startHour={startHour}
+        startMinute={startMinute}
+        endHour={endHour}
+        endMinute={endMinute}
+        intervalMinutes={intervalMinutes}
+        dateTime={dateTime}
+        onButtonPress={onButtonPress}
+      />
+    </Table>
   );
 };
 

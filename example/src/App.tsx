@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import * as React from 'react';
 
-import { StyleSheet, SafeAreaView, Text } from 'react-native';
+import { StyleSheet, SafeAreaView, Text, ScrollView } from 'react-native';
 import { BookingCalendar } from 'react-native-booking-calendar';
 
 const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
@@ -16,16 +16,18 @@ export default function App() {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <BookingCalendar
-        startDate={startDate}
-        startHour={10}
-        startMinute={0}
-        endHour={19}
-        endMinute={0}
-        intervalMinutes={intervalMinutes}
-        dateTime={dateTimeArr}
-        onButtonPress={onButtonPress}
-      />
+      <ScrollView>
+        <BookingCalendar
+          startDate={startDate}
+          startHour={10}
+          startMinute={0}
+          endHour={19}
+          endMinute={0}
+          intervalMinutes={intervalMinutes}
+          dateTime={dateTimeArr}
+          onButtonPress={onButtonPress}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }
