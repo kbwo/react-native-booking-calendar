@@ -10,7 +10,6 @@ const BookingCalendar: React.FC<BookingCalendarProps> = () => {
     <ScrollView>
       <Table>
         <Date />
-        {/* <Time /> */}
       </Table>
     </ScrollView>
   );
