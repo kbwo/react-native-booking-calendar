@@ -18,8 +18,6 @@ interface DateProps {
 
 const { width: windowWidth } = Dimensions.get('window');
 
-// const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
-
 const Date: React.FC<DateProps> = ({
   startDate,
   startHour,

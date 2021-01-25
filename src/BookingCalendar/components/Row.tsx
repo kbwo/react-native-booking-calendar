@@ -4,7 +4,7 @@ import {
   Dimensions,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
@@ -38,23 +38,25 @@ const Row: React.FC<RowProps> = ({
     dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]
   ) {
     return (
-      <TouchableHighlight onPress={onPress} style={RowStyles.rowWrapper}>
-        {typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
-          'boolean' && dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ? (
-          <Text style={RowStyles.rowMark}>○ </Text>
-        ) : typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
-            'boolean' &&
-          dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] === true ? (
-          <Text style={RowStyles.rowMark}>× </Text>
-        ) : typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
-          'string' ? (
-          <Text style={RowStyles.rowMark}>
-            {dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]}
-          </Text>
-        ) : (
-          <>{dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]}</>
-        )}
-      </TouchableHighlight>
+      <TouchableWithoutFeedback onPress={onPress}>
+        <View style={RowStyles.rowWrapper}>
+          {typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
+            'boolean' && dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ? (
+            <Text style={RowStyles.rowMark}>○ </Text>
+          ) : typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
+              'boolean' &&
+            dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] === true ? (
+            <Text style={RowStyles.rowMark}>× </Text>
+          ) : typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
+            'string' ? (
+            <Text style={RowStyles.rowMark}>
+              {dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]}
+            </Text>
+          ) : (
+            <>{dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]}</>
+          )}
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 

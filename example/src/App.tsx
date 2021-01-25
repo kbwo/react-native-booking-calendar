@@ -7,7 +7,7 @@ import { BookingCalendar } from 'react-native-booking-calendar';
 const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
 const intervalMinutes = 30;
 const dateTimeArr = {
-  '2021-1-31': { '12:00': true, '13:00': <Text>Tel</Text> },
+  '2021-3-14': { '12:00': true, '13:00': <Text>Tel</Text> },
 };
 
 export default function App() {
