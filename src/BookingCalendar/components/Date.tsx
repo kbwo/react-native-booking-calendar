@@ -1,15 +1,35 @@
-import { DateTime } from 'luxon';
-import React, { useEffect, useState } from 'react';
+import type { DateTime } from 'luxon';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
 import Time from './Time';
 
-interface DateProps {}
+interface DateProps {
+  startDate: DateTime;
+  startHour: number;
+  startMinute: number;
+  endHour: number;
+  endMinute: number;
+  intervalMinutes: number;
+  dateTime: {
+    [date: string]: { [time: string]: boolean | string | ReactNode };
+  };
+  onButtonPress: (date: DateTime) => void;
+}
 
 const { width: windowWidth } = Dimensions.get('window');
 
-const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
+// const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
 
-const Date: React.FC<DateProps> = () => {
+const Date: React.FC<DateProps> = ({
+  startDate,
+  startHour,
+  startMinute,
+  endHour,
+  endMinute,
+  intervalMinutes,
+  dateTime,
+  onButtonPress,
+}) => {
   const [date, setDate] = useState<
     {
       date: DateTime;
@@ -28,7 +48,7 @@ const Date: React.FC<DateProps> = () => {
       arr.push(oneDayLater);
     }
     setDate(arr);
-  }, []);
+  }, [startDate]);
 
   return (
     <>
@@ -47,7 +67,16 @@ const Date: React.FC<DateProps> = () => {
           ))}
         </View>
       </View>
-      <Time date={date} />
+      <Time
+        startHour={startHour}
+        startMinute={startMinute}
+        endHour={endHour}
+        endMinute={endMinute}
+        intervalMinutes={intervalMinutes}
+        dateTime={dateTime}
+        onButtonPress={onButtonPress}
+        date={date}
+      />
     </>
   );
 };

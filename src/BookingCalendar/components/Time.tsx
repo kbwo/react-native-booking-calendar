@@ -1,15 +1,18 @@
 import { DateTime } from 'luxon';
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Row from './Row';
 
-const interval = 30;
-const startHour = 5;
-const startMinute = 0;
-const endHour = 24;
-const endMinute = 0;
-
 interface TimeProps {
+  startHour: number;
+  startMinute: number;
+  endHour: number;
+  endMinute: number;
+  intervalMinutes: number;
+  dateTime: {
+    [date: string]: { [time: string]: boolean | string | ReactNode };
+  };
+  onButtonPress: (date: DateTime) => void;
   date: {
     date: DateTime;
     day: string;
@@ -18,27 +21,32 @@ interface TimeProps {
 
 const { width: windowWidth } = Dimensions.get('window');
 
-const dateTimeArr = {
-  '2021-1-31': { '12:00': true, '13:00': <Text>Tel</Text> },
-};
-
-const Time: React.FC<TimeProps> = ({ date }) => {
+const Time: React.FC<TimeProps> = ({
+  startHour,
+  startMinute,
+  endHour,
+  endMinute,
+  intervalMinutes,
+  dateTime,
+  onButtonPress,
+  date,
+}) => {
   const [time, setTime] = useState<string[]>();
 
   useEffect(() => {
     const arr = [];
     const now = DateTime.local().setLocale('ja');
     let t = now.set({ hour: startHour, minute: startMinute });
-    const loop = ((endHour - startHour) * 60) / interval + endMinute;
+    const loop = ((endHour - startHour) * 60) / intervalMinutes + endMinute;
     arr.push(t.toFormat('HH:mm'));
     for (let i = 0; i < loop; i++) {
       t = t.plus({
-        minutes: interval,
+        minutes: intervalMinutes,
       });
       arr.push(t.toFormat('HH:mm'));
     }
     setTime(arr);
-  }, []);
+  }, [startHour, startMinute, endHour, endMinute, intervalMinutes, dateTime]);
 
   return (
     <View style={TimeStyles.timeRowWrapper}>
@@ -55,9 +63,10 @@ const Time: React.FC<TimeProps> = ({ date }) => {
             {date.map((eachDate) => (
               <Row
                 key={eachDate.date.toFormat('L/dd') + t}
-                dateTimeObj={dateTimeArr}
+                dateTimeObj={dateTime}
                 date={eachDate.date}
                 timeString={t}
+                onButtonPress={onButtonPress}
               />
             ))}
           </View>

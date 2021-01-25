@@ -14,18 +14,31 @@ interface RowProps {
   };
   date: DateTime;
   timeString: string;
+  onButtonPress: (date: DateTime) => void;
 }
 
 const { width: windowWidth } = Dimensions.get('window');
 
-const Row: React.FC<RowProps> = ({ dateTimeObj, date, timeString }) => {
+const Row: React.FC<RowProps> = ({
+  dateTimeObj,
+  date,
+  timeString,
+  onButtonPress,
+}) => {
+  const onPress = () => {
+    const dateTime = date.plus({
+      hours: Number(timeString.substr(0, 2)),
+      minutes: Number(timeString.substr(3, 2)),
+    });
+    onButtonPress(dateTime);
+  };
   if (
     dateTimeObj &&
     dateTimeObj[date.toFormat('kkkk-L-dd')] &&
     dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]
   ) {
     return (
-      <TouchableHighlight style={RowStyles.rowWrapper}>
+      <TouchableHighlight onPress={onPress} style={RowStyles.rowWrapper}>
         {typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
           'boolean' && dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ? (
           <Text style={RowStyles.rowMark}>○ </Text>
