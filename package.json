@@ -34,7 +34,12 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "component",
+    "calendar",
+    "luxon",
+    "booking",
+    "UI"
   ],
   "repository": "https://github.com/kbwo/react-native-booking-calendar",
   "author": "Kodai Kabasawa <kabaaa1126@gmail.com> (https://github.com/kbwo)",
@@ -156,3 +161,4 @@
     "luxon": "^1.25.0"
   }
 }
+
