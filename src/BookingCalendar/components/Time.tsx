@@ -11,8 +11,8 @@ const endMinute = 0;
 
 interface TimeProps {
   date: {
-    day: DateTime;
-    date: string;
+    date: DateTime;
+    day: string;
   }[];
 }
 
@@ -54,9 +54,9 @@ const Time: React.FC<TimeProps> = ({ date }) => {
           <View key={t} style={TimeStyles.rowWrapper}>
             {date.map((eachDate) => (
               <Row
-                key={eachDate.day.toFormat('L/dd') + t}
+                key={eachDate.date.toFormat('L/dd') + t}
                 dateTimeObj={dateTimeArr}
-                date={eachDate.day}
+                date={eachDate.date}
                 timeString={t}
               />
             ))}

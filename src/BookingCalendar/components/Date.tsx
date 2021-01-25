@@ -4,23 +4,26 @@ import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
 import Time from './Time';
 
 interface DateProps {}
+
 const { width: windowWidth } = Dimensions.get('window');
+
+const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
+
 const Date: React.FC<DateProps> = () => {
   const [date, setDate] = useState<
     {
-      day: DateTime;
-      date: string;
+      date: DateTime;
+      day: string;
     }[]
   >([]);
 
   useEffect(() => {
     const arr = [];
-    const today = DateTime.local().setLocale('ja');
-    arr.push({ day: today, date: today.toFormat('EEEE') });
+    arr.push({ date: startDate, day: startDate.toFormat('EEEE') });
     for (let i = 1; i < 7; i++) {
       const oneDayLater = {
-        day: today.plus({ day: i }),
-        date: today.plus({ day: i }).toFormat('EEEE'),
+        date: startDate.plus({ day: i }),
+        day: startDate.plus({ day: i }).toFormat('EEEE'),
       };
       arr.push(oneDayLater);
     }
@@ -31,13 +34,14 @@ const Date: React.FC<DateProps> = () => {
     <>
       <View style={DateStyles.dateWrapper}>
         <View style={DateStyles.date}>
+          <View style={DateStyles.rightBorder} />
           {date?.map((item) => (
-            <View key={item.date} style={DateStyles.dateItem}>
+            <View key={item.day} style={DateStyles.dateItem}>
               <Text style={Platform.OS === 'android' && DateStyles.text}>
-                {item.day.toFormat('LL/d')}
+                {item.date.toFormat('LL/d')}
               </Text>
               <Text style={Platform.OS === 'android' && DateStyles.text}>
-                {item.date}
+                {item.day}
               </Text>
             </View>
           ))}
@@ -50,6 +54,10 @@ const Date: React.FC<DateProps> = () => {
 
 const DateStyles = StyleSheet.create({
   dateWrapper: {},
+  rightBorder: {
+    borderRightWidth: 1,
+    borderRightColor: '#e0e0e0',
+  },
   date: {
     flexDirection: 'row',
     backgroundColor: '#fff',
