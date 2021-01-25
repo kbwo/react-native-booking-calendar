@@ -1,23 +1,24 @@
 import { DateTime } from 'luxon';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import Time from './Time';
 
 interface DateProps {}
 const Date: React.FC<DateProps> = () => {
   const [date, setDate] = useState<
     {
-      day: string;
+      day: DateTime;
       date: string;
     }[]
-  >();
+  >([]);
 
   useEffect(() => {
     const arr = [];
     const today = DateTime.local().setLocale('ja');
-    arr.push({ day: today.toFormat('L/d'), date: today.toFormat('EEEE') });
+    arr.push({ day: today, date: today.toFormat('EEEE') });
     for (let i = 1; i < 7; i++) {
       const oneDayLater = {
-        day: today.plus({ day: i }).toFormat('L/d'),
+        day: today.plus({ day: i }),
         date: today.plus({ day: i }).toFormat('EEEE'),
       };
       arr.push(oneDayLater);
@@ -26,24 +27,24 @@ const Date: React.FC<DateProps> = () => {
   }, []);
 
   return (
-    <View style={DateStyles.dateWrapper}>
-      <View style={DateStyles.date}>
-        {date?.map((item) => (
-          <View style={DateStyles.dateItem}>
-            <Text>{item.day}</Text>
-            <Text>{item.date}</Text>
-          </View>
-        ))}
+    <>
+      <View style={DateStyles.dateWrapper}>
+        <View style={DateStyles.date}>
+          {date?.map((item) => (
+            <View style={DateStyles.dateItem}>
+              <Text>{item.day.toFormat('LL/d')}</Text>
+              <Text>{item.date}</Text>
+            </View>
+          ))}
+        </View>
       </View>
-    </View>
+      <Time date={date} />
+    </>
   );
 };
 
 const DateStyles = StyleSheet.create({
-  dateWrapper: {
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
-  },
+  dateWrapper: {},
   date: {
     flexDirection: 'row',
     backgroundColor: '#fff',
@@ -51,11 +52,14 @@ const DateStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   dateItem: {
-    borderWidth: 1,
-    borderColor: '#e0e0e0',
+    // borderWidth: 1,
+    // borderColor: '#e0e0e0',
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderColor: '#e0e0e0',
   },
 });
 
