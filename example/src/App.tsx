@@ -5,8 +5,7 @@ import { StyleSheet, SafeAreaView, Text, ScrollView } from 'react-native';
 import { BookingCalendar } from 'react-native-booking-calendar';
 
 const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
-const intervalMinutes = 30;
-const dateTimeArr = {
+const dateTimeObj = {
   '2021-3-14': { '12:00': true, '13:00': <Text>Tel</Text> },
 };
 
@@ -23,8 +22,8 @@ export default function App() {
           startMinute={0}
           endHour={19}
           endMinute={0}
-          intervalMinutes={intervalMinutes}
-          dateTime={dateTimeArr}
+          intervalMinutes={30}
+          dateTime={dateTimeObj}
           onButtonPress={onButtonPress}
         />
       </ScrollView>
