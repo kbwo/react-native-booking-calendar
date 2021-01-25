@@ -152,6 +152,7 @@
     ]
   },
   "dependencies": {
+    "jsc-android": "^241213.1.0",
     "luxon": "^1.25.0"
   }
 }

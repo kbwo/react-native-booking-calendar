@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
 import Time from './Time';
 
 interface DateProps {}
+const { width: windowWidth } = Dimensions.get('window');
 const Date: React.FC<DateProps> = () => {
   const [date, setDate] = useState<
     {
@@ -31,9 +32,13 @@ const Date: React.FC<DateProps> = () => {
       <View style={DateStyles.dateWrapper}>
         <View style={DateStyles.date}>
           {date?.map((item) => (
-            <View style={DateStyles.dateItem}>
-              <Text>{item.day.toFormat('LL/d')}</Text>
-              <Text>{item.date}</Text>
+            <View key={item.date} style={DateStyles.dateItem}>
+              <Text style={Platform.OS === 'android' && DateStyles.text}>
+                {item.day.toFormat('LL/d')}
+              </Text>
+              <Text style={Platform.OS === 'android' && DateStyles.text}>
+                {item.date}
+              </Text>
             </View>
           ))}
         </View>
@@ -52,14 +57,15 @@ const DateStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   dateItem: {
-    // borderWidth: 1,
-    // borderColor: '#e0e0e0',
-    width: 50,
+    width: windowWidth * 0.12,
     justifyContent: 'center',
     alignItems: 'center',
     borderTopWidth: 1,
     borderRightWidth: 1,
     borderColor: '#e0e0e0',
+  },
+  text: {
+    fontSize: 12,
   },
 });
 

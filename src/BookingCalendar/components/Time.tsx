@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Row from './Row';
 
 const interval = 30;
@@ -15,6 +15,8 @@ interface TimeProps {
     date: string;
   }[];
 }
+
+const { width: windowWidth } = Dimensions.get('window');
 
 const dateTimeArr = {
   '2021-1-31': { '12:00': true, '13:00': <Text>Tel</Text> },
@@ -49,10 +51,10 @@ const Time: React.FC<TimeProps> = ({ date }) => {
       </View>
       <View style={TimeStyles.markRows}>
         {time?.map((t) => (
-          <View style={TimeStyles.rowWrapper}>
+          <View key={t} style={TimeStyles.rowWrapper}>
             {date.map((eachDate) => (
               <Row
-                key={eachDate.day.toFormat('L/dd') + time}
+                key={eachDate.day.toFormat('L/dd') + t}
                 dateTimeObj={dateTimeArr}
                 date={eachDate.day}
                 timeString={t}
@@ -70,7 +72,7 @@ const TimeStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   timeWrapper: {
-    width: 63,
+    width: windowWidth * 0.16,
   },
   time: {
     borderTopWidth: 1,

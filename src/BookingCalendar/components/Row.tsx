@@ -1,6 +1,12 @@
 import type { DateTime } from 'luxon';
 import React, { ReactNode } from 'react';
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native';
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 
 interface RowProps {
   dateTimeObj: {
@@ -9,6 +15,9 @@ interface RowProps {
   date: DateTime;
   timeString: string;
 }
+
+const { width: windowWidth } = Dimensions.get('window');
+
 const Row: React.FC<RowProps> = ({ dateTimeObj, date, timeString }) => {
   if (
     dateTimeObj &&
@@ -52,7 +61,7 @@ const RowStyles = StyleSheet.create({
     borderTopWidth: 1,
     borderColor: '#e0e0e0',
     height: 50,
-    width: 50,
+    width: windowWidth * 0.12,
   },
   rowMark: {
     fontSize: 20,
