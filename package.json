@@ -1,6 +1,6 @@
 {
   "name": "react-native-booking-calendar",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "calendar component for booking app",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
