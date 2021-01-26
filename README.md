@@ -2,7 +2,7 @@
 
 calendar component for booking app
 
-![demo gif](demo/example.gif)
+![demo gif](demo/demo.gif)
 
 ## Installation
 
