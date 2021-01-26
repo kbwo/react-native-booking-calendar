@@ -52,7 +52,7 @@ const Row: React.FC<RowProps> = ({
           {typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
             'boolean' && dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ? (
             <Text style={[RowStyles.rowMark, { color: trueSignColor }]}>
-              ○{' '}
+              〇
             </Text>
           ) : typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
             'string' ? (
