@@ -3,9 +3,15 @@ import { Dimensions, StyleSheet, View } from 'react-native';
 
 const { width: windowWidth } = Dimensions.get('window');
 
-interface TableProps {}
-const Table: React.FC<TableProps> = ({ children }) => {
-  return <View style={TableStyle.wrapper}>{children}</View>;
+interface TableProps {
+  backgroundColor: string;
+}
+const Table: React.FC<TableProps> = ({ children, backgroundColor }) => {
+  return (
+    <View style={[TableStyle.wrapper, { backgroundColor: backgroundColor }]}>
+      {children}
+    </View>
+  );
 };
 
 const TableStyle = StyleSheet.create({

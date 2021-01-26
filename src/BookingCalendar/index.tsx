@@ -14,6 +14,11 @@ interface BookingCalendarProps {
     [date: string]: { [time: string]: boolean | string | ReactNode };
   };
   onButtonPress: (date: DateTime) => void;
+  borderColor?: string;
+  fontColor?: string;
+  trueSignColor?: string;
+  falseSignColor?: string;
+  backgroundColor?: string;
 }
 
 const BookingCalendar: React.FC<BookingCalendarProps> = ({
@@ -25,9 +30,14 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
   intervalMinutes,
   dateTime,
   onButtonPress,
+  borderColor = '#e0e0e0',
+  trueSignColor = 'tomato',
+  falseSignColor = 'dodgerblue',
+  fontColor = '#000',
+  backgroundColor = '#fff',
 }) => {
   return (
-    <Table>
+    <Table backgroundColor={backgroundColor}>
       <Date
         startDate={startDate}
         startHour={startHour}
@@ -37,6 +47,10 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
         intervalMinutes={intervalMinutes}
         dateTime={dateTime}
         onButtonPress={onButtonPress}
+        fontColor={fontColor}
+        borderColor={borderColor}
+        trueSignColor={trueSignColor}
+        falseSignColor={falseSignColor}
       />
     </Table>
   );

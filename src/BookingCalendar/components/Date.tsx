@@ -14,6 +14,10 @@ interface DateProps {
     [date: string]: { [time: string]: boolean | string | ReactNode };
   };
   onButtonPress: (date: DateTime) => void;
+  fontColor: string;
+  trueSignColor: string;
+  falseSignColor: string;
+  borderColor: string;
 }
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -27,6 +31,10 @@ const Date: React.FC<DateProps> = ({
   intervalMinutes,
   dateTime,
   onButtonPress,
+  fontColor,
+  borderColor,
+  trueSignColor,
+  falseSignColor,
 }) => {
   const [date, setDate] = useState<
     {
@@ -52,13 +60,28 @@ const Date: React.FC<DateProps> = ({
     <>
       <View style={DateStyles.dateWrapper}>
         <View style={DateStyles.date}>
-          <View style={DateStyles.rightBorder} />
+          <View
+            style={[DateStyles.rightBorder, { borderColor: borderColor }]}
+          />
           {date?.map((item) => (
-            <View key={item.day} style={DateStyles.dateItem}>
-              <Text style={Platform.OS === 'android' && DateStyles.text}>
+            <View
+              key={item.day}
+              style={[DateStyles.dateItem, { borderColor: borderColor }]}
+            >
+              <Text
+                style={[
+                  Platform.OS === 'android' && DateStyles.text,
+                  { color: fontColor },
+                ]}
+              >
                 {item.date.toFormat('LL/d')}
               </Text>
-              <Text style={Platform.OS === 'android' && DateStyles.text}>
+              <Text
+                style={[
+                  Platform.OS === 'android' && DateStyles.text,
+                  { color: fontColor },
+                ]}
+              >
                 {item.day}
               </Text>
             </View>
@@ -74,6 +97,10 @@ const Date: React.FC<DateProps> = ({
         dateTime={dateTime}
         onButtonPress={onButtonPress}
         date={date}
+        borderColor={borderColor}
+        fontColor={fontColor}
+        trueSignColor={trueSignColor}
+        falseSignColor={falseSignColor}
       />
     </>
   );
@@ -83,11 +110,9 @@ const DateStyles = StyleSheet.create({
   dateWrapper: {},
   rightBorder: {
     borderRightWidth: 1,
-    borderRightColor: '#e0e0e0',
   },
   date: {
     flexDirection: 'row',
-    backgroundColor: '#fff',
     height: 60,
     justifyContent: 'flex-end',
   },
@@ -97,7 +122,6 @@ const DateStyles = StyleSheet.create({
     alignItems: 'center',
     borderTopWidth: 1,
     borderRightWidth: 1,
-    borderColor: '#e0e0e0',
   },
   text: {
     fontSize: 12,

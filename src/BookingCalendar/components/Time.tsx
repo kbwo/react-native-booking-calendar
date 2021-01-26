@@ -17,6 +17,10 @@ interface TimeProps {
     date: DateTime;
     day: string;
   }[];
+  fontColor: string;
+  trueSignColor: string;
+  falseSignColor: string;
+  borderColor: string;
 }
 
 const { width: windowWidth } = Dimensions.get('window');
@@ -30,6 +34,10 @@ const Time: React.FC<TimeProps> = ({
   dateTime,
   onButtonPress,
   date,
+  fontColor,
+  borderColor,
+  trueSignColor,
+  falseSignColor,
 }) => {
   const [time, setTime] = useState<string[]>();
 
@@ -52,8 +60,13 @@ const Time: React.FC<TimeProps> = ({
     <View style={TimeStyles.timeRowWrapper}>
       <View style={TimeStyles.timeWrapper}>
         {time?.map((item) => (
-          <View key={item} style={TimeStyles.time}>
-            <Text style={TimeStyles.timeText}>{item}</Text>
+          <View
+            key={item}
+            style={[TimeStyles.time, { borderColor: borderColor }]}
+          >
+            <Text style={[TimeStyles.timeText, { color: fontColor }]}>
+              {item}
+            </Text>
           </View>
         ))}
       </View>
@@ -67,6 +80,10 @@ const Time: React.FC<TimeProps> = ({
                 date={eachDate.date}
                 timeString={t}
                 onButtonPress={onButtonPress}
+                fontColor={fontColor}
+                borderColor={borderColor}
+                trueSignColor={trueSignColor}
+                falseSignColor={falseSignColor}
               />
             ))}
           </View>
@@ -86,7 +103,6 @@ const TimeStyles = StyleSheet.create({
   time: {
     borderTopWidth: 1,
     borderRightWidth: 1,
-    borderColor: '#e0e0e0',
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',

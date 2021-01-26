@@ -25,6 +25,11 @@ export default function App() {
           intervalMinutes={30}
           dateTime={dateTimeObj}
           onButtonPress={onButtonPress}
+          backgroundColor="#e0e0e0"
+          borderColor="pink"
+          fontColor="blue"
+          trueSignColor="red"
+          falseSignColor="blue"
         />
       </ScrollView>
     </SafeAreaView>
