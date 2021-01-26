@@ -61,9 +61,7 @@ const Date: React.FC<DateProps> = ({
     <>
       <View style={DateStyles.dateWrapper}>
         <View style={DateStyles.date}>
-          <View
-            style={[DateStyles.rightBorder, { borderColor: borderColor }]}
-          />
+          <View style={[DateStyles.border, { borderColor: borderColor }]} />
           {date?.map((item) => (
             <View
               key={item.day}
@@ -103,7 +101,7 @@ const Date: React.FC<DateProps> = ({
 
 const DateStyles = StyleSheet.create({
   dateWrapper: {},
-  rightBorder: {
+  border: {
     borderRightWidth: 1,
   },
   date: {
@@ -112,7 +110,7 @@ const DateStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   dateItem: {
-    width: windowWidth * 0.12,
+    width: windowWidth * 0.127,
     justifyContent: 'center',
     alignItems: 'center',
     borderTopWidth: 1,

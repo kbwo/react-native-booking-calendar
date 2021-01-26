@@ -96,7 +96,7 @@ const TimeStyles = StyleSheet.create({
     flexDirection: 'row',
   },
   timeWrapper: {
-    width: windowWidth * 0.16,
+    width: windowWidth * 0.11,
   },
   time: {
     borderTopWidth: 1,
@@ -105,7 +105,9 @@ const TimeStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  timeText: {},
+  timeText: {
+    fontSize: 12,
+  },
   rowWrapper: {
     flexDirection: 'row',
   },

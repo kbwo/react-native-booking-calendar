@@ -81,7 +81,7 @@ const RowStyles = StyleSheet.create({
     // borderBottomWidth: 1,
     borderTopWidth: 1,
     height: 50,
-    width: windowWidth * 0.12,
+    width: windowWidth * 0.127,
   },
   rowMark: {
     fontSize: 20,
