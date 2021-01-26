@@ -68,13 +68,23 @@ const Date: React.FC<DateProps> = ({
               style={[DateStyles.dateItem, { borderColor: borderColor }]}
             >
               <Text
-                style={[DateStyles.text, { color: fontColor }]}
+                style={[
+                  DateStyles.text,
+                  { color: fontColor },
+                  item.date.toFormat('E') === '6' && DateStyles.blueText,
+                  item.date.toFormat('E') === '7' && DateStyles.redText,
+                ]}
                 adjustsFontSizeToFit={true}
               >
                 {item.date.toFormat('LL/d')}
               </Text>
               <Text
-                style={[DateStyles.text, { color: fontColor }]}
+                style={[
+                  DateStyles.text,
+                  { color: fontColor },
+                  item.date.toFormat('E') === '6' && DateStyles.blueText,
+                  item.date.toFormat('E') === '7' && DateStyles.redText,
+                ]}
                 adjustsFontSizeToFit={true}
               >
                 {item.day}
@@ -118,6 +128,12 @@ const DateStyles = StyleSheet.create({
   },
   text: {
     fontSize: 12,
+  },
+  redText: {
+    color: 'red',
+  },
+  blueText: {
+    color: 'blue',
   },
 });
 

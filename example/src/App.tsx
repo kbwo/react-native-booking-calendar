@@ -41,7 +41,7 @@ export default function App() {
   };
 
   const defaultRow = {
-    row: <Text style={styles.disableButton}>× </Text>,
+    row: <Text style={styles.disableButton}>×</Text>,
     onPress: onButtonPress,
   };
   return (
