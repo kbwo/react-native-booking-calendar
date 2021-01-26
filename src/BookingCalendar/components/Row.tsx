@@ -13,7 +13,7 @@ interface RowElement {
 }
 
 interface RowProps {
-  dateTimeObj: {
+  dateTimeObj?: {
     [date: string]: {
       [time: string]: RowElement;
     };

@@ -13,7 +13,7 @@ interface TimeProps {
   endHour: number;
   endMinute: number;
   intervalMinutes: number;
-  dateTime: {
+  dateTime?: {
     [date: string]: {
       [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
     };
