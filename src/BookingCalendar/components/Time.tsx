@@ -4,6 +4,10 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Row from './Row';
 
 interface TimeProps {
+  defaultRow?: {
+    row: ReactNode;
+    onPress: (d: DateTime) => void;
+  };
   startHour: number;
   startMinute: number;
   endHour: number;
@@ -25,6 +29,7 @@ interface TimeProps {
 const { width: windowWidth } = Dimensions.get('window');
 
 const Time: React.FC<TimeProps> = ({
+  defaultRow,
   startHour,
   startMinute,
   endHour,
@@ -71,6 +76,7 @@ const Time: React.FC<TimeProps> = ({
           <View key={t} style={TimeStyles.rowWrapper}>
             {date.map((eachDate) => (
               <Row
+                defaultRow={defaultRow}
                 key={eachDate.date.toFormat('L/dd') + t}
                 dateTimeObj={dateTime}
                 date={eachDate.date}

@@ -4,6 +4,10 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Time from './Time';
 
 interface DateProps {
+  defaultRow?: {
+    row: ReactNode;
+    onPress: (d: DateTime) => void;
+  };
   startDate: DateTime;
   startHour: number;
   startMinute: number;
@@ -22,6 +26,7 @@ interface DateProps {
 const { width: windowWidth } = Dimensions.get('window');
 
 const Date: React.FC<DateProps> = ({
+  defaultRow,
   startDate,
   startHour,
   startMinute,
@@ -81,6 +86,7 @@ const Date: React.FC<DateProps> = ({
         </View>
       </View>
       <Time
+        defaultRow={defaultRow}
         startHour={startHour}
         startMinute={startMinute}
         endHour={endHour}

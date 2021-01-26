@@ -4,6 +4,10 @@ import Date from './components/Date';
 import Table from './components/Table';
 
 interface BookingCalendarProps {
+  defaultRow?: {
+    row: ReactNode;
+    onPress: (d: DateTime) => void;
+  };
   startDate: DateTime;
   startHour: number;
   startMinute: number;
@@ -21,6 +25,7 @@ interface BookingCalendarProps {
 }
 
 const BookingCalendar: React.FC<BookingCalendarProps> = ({
+  defaultRow,
   startDate,
   startHour,
   startMinute,
@@ -35,6 +40,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
   return (
     <Table backgroundColor={backgroundColor}>
       <Date
+        defaultRow={defaultRow}
         startDate={startDate}
         startHour={startHour}
         startMinute={startMinute}

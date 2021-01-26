@@ -16,10 +16,16 @@ export default function App() {
       '13:00': { row: <Text>Tel</Text>, onPress: onButtonPress },
     },
   };
+
+  const defaultRow = {
+    row: <Text>× </Text>,
+    onPress: onButtonPress,
+  };
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <BookingCalendar
+          defaultRow={defaultRow}
           startDate={startDate}
           startHour={10}
           startMinute={0}
