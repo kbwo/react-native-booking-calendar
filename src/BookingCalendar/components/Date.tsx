@@ -1,6 +1,6 @@
 import type { DateTime } from 'luxon';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Time from './Time';
 
 interface DateProps {
@@ -65,18 +65,14 @@ const Date: React.FC<DateProps> = ({
               style={[DateStyles.dateItem, { borderColor: borderColor }]}
             >
               <Text
-                style={[
-                  Platform.OS === 'android' && DateStyles.text,
-                  { color: fontColor },
-                ]}
+                style={[DateStyles.text, { color: fontColor }]}
+                adjustsFontSizeToFit={true}
               >
                 {item.date.toFormat('LL/d')}
               </Text>
               <Text
-                style={[
-                  Platform.OS === 'android' && DateStyles.text,
-                  { color: fontColor },
-                ]}
+                style={[DateStyles.text, { color: fontColor }]}
+                adjustsFontSizeToFit={true}
               >
                 {item.day}
               </Text>
