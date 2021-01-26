@@ -4,40 +4,41 @@ import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Row from './Row';
 
 interface TimeProps {
+  defaultRow?: {
+    row: ReactNode;
+    onPress: (d: DateTime) => void;
+  };
   startHour: number;
   startMinute: number;
   endHour: number;
   endMinute: number;
   intervalMinutes: number;
   dateTime: {
-    [date: string]: { [time: string]: boolean | string | ReactNode };
+    [date: string]: {
+      [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
+    };
   };
-  onButtonPress: (date: DateTime) => void;
   date: {
     date: DateTime;
     day: string;
   }[];
   fontColor: string;
-  trueSignColor: string;
-  falseSignColor: string;
   borderColor: string;
 }
 
 const { width: windowWidth } = Dimensions.get('window');
 
 const Time: React.FC<TimeProps> = ({
+  defaultRow,
   startHour,
   startMinute,
   endHour,
   endMinute,
   intervalMinutes,
   dateTime,
-  onButtonPress,
   date,
   fontColor,
   borderColor,
-  trueSignColor,
-  falseSignColor,
 }) => {
   const [time, setTime] = useState<string[]>();
 
@@ -75,15 +76,12 @@ const Time: React.FC<TimeProps> = ({
           <View key={t} style={TimeStyles.rowWrapper}>
             {date.map((eachDate) => (
               <Row
+                defaultRow={defaultRow}
                 key={eachDate.date.toFormat('L/dd') + t}
                 dateTimeObj={dateTime}
                 date={eachDate.date}
                 timeString={t}
-                onButtonPress={onButtonPress}
-                fontColor={fontColor}
                 borderColor={borderColor}
-                trueSignColor={trueSignColor}
-                falseSignColor={falseSignColor}
               />
             ))}
           </View>

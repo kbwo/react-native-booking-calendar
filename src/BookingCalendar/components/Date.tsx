@@ -1,9 +1,13 @@
 import type { DateTime } from 'luxon';
 import React, { ReactNode, useEffect, useState } from 'react';
-import { Dimensions, Platform, StyleSheet, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Time from './Time';
 
 interface DateProps {
+  defaultRow?: {
+    row: ReactNode;
+    onPress: (d: DateTime) => void;
+  };
   startDate: DateTime;
   startHour: number;
   startMinute: number;
@@ -11,18 +15,18 @@ interface DateProps {
   endMinute: number;
   intervalMinutes: number;
   dateTime: {
-    [date: string]: { [time: string]: boolean | string | ReactNode };
+    [date: string]: {
+      [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
+    };
   };
-  onButtonPress: (date: DateTime) => void;
   fontColor: string;
-  trueSignColor: string;
-  falseSignColor: string;
   borderColor: string;
 }
 
 const { width: windowWidth } = Dimensions.get('window');
 
 const Date: React.FC<DateProps> = ({
+  defaultRow,
   startDate,
   startHour,
   startMinute,
@@ -30,11 +34,8 @@ const Date: React.FC<DateProps> = ({
   endMinute,
   intervalMinutes,
   dateTime,
-  onButtonPress,
   fontColor,
   borderColor,
-  trueSignColor,
-  falseSignColor,
 }) => {
   const [date, setDate] = useState<
     {
@@ -69,18 +70,14 @@ const Date: React.FC<DateProps> = ({
               style={[DateStyles.dateItem, { borderColor: borderColor }]}
             >
               <Text
-                style={[
-                  Platform.OS === 'android' && DateStyles.text,
-                  { color: fontColor },
-                ]}
+                style={[DateStyles.text, { color: fontColor }]}
+                adjustsFontSizeToFit={true}
               >
                 {item.date.toFormat('LL/d')}
               </Text>
               <Text
-                style={[
-                  Platform.OS === 'android' && DateStyles.text,
-                  { color: fontColor },
-                ]}
+                style={[DateStyles.text, { color: fontColor }]}
+                adjustsFontSizeToFit={true}
               >
                 {item.day}
               </Text>
@@ -89,18 +86,16 @@ const Date: React.FC<DateProps> = ({
         </View>
       </View>
       <Time
+        defaultRow={defaultRow}
         startHour={startHour}
         startMinute={startMinute}
         endHour={endHour}
         endMinute={endMinute}
         intervalMinutes={intervalMinutes}
         dateTime={dateTime}
-        onButtonPress={onButtonPress}
         date={date}
         borderColor={borderColor}
         fontColor={fontColor}
-        trueSignColor={trueSignColor}
-        falseSignColor={falseSignColor}
       />
     </>
   );
