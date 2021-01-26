@@ -2,6 +2,8 @@
 
 calendar component for booking app
 
+![demo gif](demo/example.gif)
+
 ## Installation
 
 ```sh

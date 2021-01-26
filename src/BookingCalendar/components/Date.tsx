@@ -120,7 +120,7 @@ const DateStyles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   dateItem: {
-    width: windowWidth * 0.127,
+    width: windowWidth * 0.1272,
     justifyContent: 'center',
     alignItems: 'center',
     borderTopWidth: 1,
