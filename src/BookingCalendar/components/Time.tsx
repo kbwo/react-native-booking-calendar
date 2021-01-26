@@ -10,16 +10,15 @@ interface TimeProps {
   endMinute: number;
   intervalMinutes: number;
   dateTime: {
-    [date: string]: { [time: string]: boolean | string | ReactNode };
+    [date: string]: {
+      [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
+    };
   };
-  onButtonPress: (date: DateTime) => void;
   date: {
     date: DateTime;
     day: string;
   }[];
   fontColor: string;
-  trueSignColor: string;
-  falseSignColor: string;
   borderColor: string;
 }
 
@@ -32,12 +31,9 @@ const Time: React.FC<TimeProps> = ({
   endMinute,
   intervalMinutes,
   dateTime,
-  onButtonPress,
   date,
   fontColor,
   borderColor,
-  trueSignColor,
-  falseSignColor,
 }) => {
   const [time, setTime] = useState<string[]>();
 
@@ -79,11 +75,7 @@ const Time: React.FC<TimeProps> = ({
                 dateTimeObj={dateTime}
                 date={eachDate.date}
                 timeString={t}
-                onButtonPress={onButtonPress}
-                fontColor={fontColor}
                 borderColor={borderColor}
-                trueSignColor={trueSignColor}
-                falseSignColor={falseSignColor}
               />
             ))}
           </View>

@@ -11,12 +11,11 @@ interface DateProps {
   endMinute: number;
   intervalMinutes: number;
   dateTime: {
-    [date: string]: { [time: string]: boolean | string | ReactNode };
+    [date: string]: {
+      [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
+    };
   };
-  onButtonPress: (date: DateTime) => void;
   fontColor: string;
-  trueSignColor: string;
-  falseSignColor: string;
   borderColor: string;
 }
 
@@ -30,11 +29,8 @@ const Date: React.FC<DateProps> = ({
   endMinute,
   intervalMinutes,
   dateTime,
-  onButtonPress,
   fontColor,
   borderColor,
-  trueSignColor,
-  falseSignColor,
 }) => {
   const [date, setDate] = useState<
     {
@@ -95,12 +91,9 @@ const Date: React.FC<DateProps> = ({
         endMinute={endMinute}
         intervalMinutes={intervalMinutes}
         dateTime={dateTime}
-        onButtonPress={onButtonPress}
         date={date}
         borderColor={borderColor}
         fontColor={fontColor}
-        trueSignColor={trueSignColor}
-        falseSignColor={falseSignColor}
       />
     </>
   );

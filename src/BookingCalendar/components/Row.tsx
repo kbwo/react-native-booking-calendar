@@ -3,21 +3,18 @@ import React, { ReactNode } from 'react';
 import {
   Dimensions,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
 interface RowProps {
   dateTimeObj: {
-    [date: string]: { [time: string]: boolean | string | ReactNode };
+    [date: string]: {
+      [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
+    };
   };
   date: DateTime;
   timeString: string;
-  onButtonPress: (date: DateTime) => void;
-  fontColor: string;
-  trueSignColor: string;
-  falseSignColor: string;
   borderColor: string;
 }
 
@@ -27,51 +24,29 @@ const Row: React.FC<RowProps> = ({
   dateTimeObj,
   date,
   timeString,
-  onButtonPress,
-  fontColor,
   borderColor,
-  trueSignColor,
-  falseSignColor,
 }) => {
-  const onPress = () => {
-    const dateTime = date.plus({
-      hours: Number(timeString.substr(0, 2)),
-      minutes: Number(timeString.substr(3, 2)),
-    });
-    onButtonPress(dateTime);
-  };
   if (
     dateTimeObj &&
     dateTimeObj[date.toFormat('kkkk-L-dd')] &&
-    dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] &&
-    dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] !== false
+    dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]
   ) {
+    const onPress = () => {
+      const dateTime = date.plus({
+        hours: Number(timeString.substr(0, 2)),
+        minutes: Number(timeString.substr(3, 2)),
+      });
+      dateTimeObj[date.toFormat('kkkk-L-dd')][timeString].onPress(dateTime);
+    };
     return (
       <TouchableWithoutFeedback onPress={onPress}>
         <View style={[RowStyles.rowWrapper, { borderColor: borderColor }]}>
-          {typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
-            'boolean' && dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ? (
-            <Text style={[RowStyles.rowMark, { color: trueSignColor }]}>
-              〇
-            </Text>
-          ) : typeof dateTimeObj[date.toFormat('kkkk-L-dd')][timeString] ===
-            'string' ? (
-            <Text style={[RowStyles.rowMark, { color: fontColor }]}>
-              {dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]}
-            </Text>
-          ) : (
-            <>{dateTimeObj[date.toFormat('kkkk-L-dd')][timeString]}</>
-          )}
+          <>{dateTimeObj[date.toFormat('kkkk-L-dd')][timeString].row}</>
         </View>
       </TouchableWithoutFeedback>
     );
   }
-
-  return (
-    <View style={[RowStyles.rowWrapper, { borderColor: borderColor }]}>
-      <Text style={[RowStyles.rowMark, { color: falseSignColor }]}>× </Text>
-    </View>
-  );
+  return <View style={[RowStyles.rowWrapper, { borderColor: borderColor }]} />;
 };
 
 const RowStyles = StyleSheet.create({

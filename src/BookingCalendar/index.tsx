@@ -11,13 +11,12 @@ interface BookingCalendarProps {
   endMinute: number;
   intervalMinutes: number;
   dateTime: {
-    [date: string]: { [time: string]: boolean | string | ReactNode };
+    [date: string]: {
+      [time: string]: { row: ReactNode; onPress: (d: DateTime) => void };
+    };
   };
-  onButtonPress: (date: DateTime) => void;
   borderColor?: string;
   fontColor?: string;
-  trueSignColor?: string;
-  falseSignColor?: string;
   backgroundColor?: string;
 }
 
@@ -29,10 +28,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
   endMinute,
   intervalMinutes,
   dateTime,
-  onButtonPress,
   borderColor = '#e0e0e0',
-  trueSignColor = 'tomato',
-  falseSignColor = 'dodgerblue',
   fontColor = '#000',
   backgroundColor = '#fff',
 }) => {
@@ -46,11 +42,8 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
         endMinute={endMinute}
         intervalMinutes={intervalMinutes}
         dateTime={dateTime}
-        onButtonPress={onButtonPress}
         fontColor={fontColor}
         borderColor={borderColor}
-        trueSignColor={trueSignColor}
-        falseSignColor={falseSignColor}
       />
     </Table>
   );
