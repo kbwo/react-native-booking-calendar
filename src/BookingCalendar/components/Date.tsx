@@ -9,10 +9,8 @@ interface DateProps {
     onPress: (d: DateTime) => void;
   };
   startDate: DateTime;
-  startHour: number;
-  startMinute: number;
-  endHour: number;
-  endMinute: number;
+  startTime: Date;
+  endTime: Date;
   intervalMinutes: number;
   dateTime?: {
     [date: string]: {
@@ -28,10 +26,8 @@ const { width: windowWidth } = Dimensions.get('window');
 const Date: React.FC<DateProps> = ({
   defaultRow,
   startDate,
-  startHour,
-  startMinute,
-  endHour,
-  endMinute,
+  startTime,
+  endTime,
   intervalMinutes,
   dateTime,
   fontColor,
@@ -94,16 +90,16 @@ const Date: React.FC<DateProps> = ({
         </View>
       </View>
       <Time
-        defaultRow={defaultRow}
-        startHour={startHour}
-        startMinute={startMinute}
-        endHour={endHour}
-        endMinute={endMinute}
-        intervalMinutes={intervalMinutes}
-        dateTime={dateTime}
-        date={date}
-        borderColor={borderColor}
-        fontColor={fontColor}
+        {...{
+          defaultRow,
+          startTime,
+          endTime,
+          intervalMinutes,
+          dateTime,
+          date,
+          borderColor,
+          fontColor,
+        }}
       />
     </>
   );

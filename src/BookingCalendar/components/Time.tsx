@@ -1,4 +1,4 @@
-import { DateTime } from 'luxon';
+import type { DateTime } from 'luxon';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Row from './Row';
@@ -8,10 +8,8 @@ interface TimeProps {
     row: ReactNode;
     onPress: (d: DateTime) => void;
   };
-  startHour: number;
-  startMinute: number;
-  endHour: number;
-  endMinute: number;
+  startTime: Date;
+  endTime: Date;
   intervalMinutes: number;
   dateTime?: {
     [date: string]: {
@@ -30,10 +28,8 @@ const { width: windowWidth } = Dimensions.get('window');
 
 const Time: React.FC<TimeProps> = ({
   defaultRow,
-  startHour,
-  startMinute,
-  endHour,
-  endMinute,
+  startTime,
+  endTime,
   intervalMinutes,
   dateTime,
   date,
@@ -44,18 +40,19 @@ const Time: React.FC<TimeProps> = ({
 
   useEffect(() => {
     const arr = [];
-    const now = DateTime.local().setLocale('ja');
-    let t = now.set({ hour: startHour, minute: startMinute });
+    const datetime = startTime;
+    const startHour = startTime.getHours();
+    const endHour = endTime.getHours();
+    const endMinute = endTime.getMinutes();
+    arr.push(startTime.toTimeString().slice(0, 5));
+
     const loop = ((endHour - startHour) * 60) / intervalMinutes + endMinute;
-    arr.push(t.toFormat('HH:mm'));
     for (let i = 0; i < loop; i++) {
-      t = t.plus({
-        minutes: intervalMinutes,
-      });
-      arr.push(t.toFormat('HH:mm'));
+      datetime.setMinutes(datetime.getMinutes() + intervalMinutes);
+      arr.push(datetime.toTimeString().slice(0, 5));
     }
     setTime(arr);
-  }, [startHour, startMinute, endHour, endMinute, intervalMinutes, dateTime]);
+  }, [startTime, endTime, intervalMinutes, dateTime]);
 
   return (
     <View style={TimeStyles.timeRowWrapper}>

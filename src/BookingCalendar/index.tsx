@@ -9,10 +9,8 @@ interface BookingCalendarProps {
     onPress: (d: DateTime) => void;
   };
   startDate: DateTime;
-  startHour: number;
-  startMinute: number;
-  endHour: number;
-  endMinute: number;
+  startTime: Date;
+  endTime: Date;
   intervalMinutes: number;
   dateTime?: {
     [date: string]: {
@@ -27,10 +25,8 @@ interface BookingCalendarProps {
 const BookingCalendar: React.FC<BookingCalendarProps> = ({
   defaultRow,
   startDate,
-  startHour,
-  startMinute,
-  endHour,
-  endMinute,
+  startTime,
+  endTime,
   intervalMinutes,
   dateTime,
   borderColor = '#e0e0e0',
@@ -38,18 +34,18 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({
   backgroundColor = '#fff',
 }) => {
   return (
-    <Table backgroundColor={backgroundColor}>
+    <Table {...{ backgroundColor }}>
       <Date
-        defaultRow={defaultRow}
-        startDate={startDate}
-        startHour={startHour}
-        startMinute={startMinute}
-        endHour={endHour}
-        endMinute={endMinute}
-        intervalMinutes={intervalMinutes}
-        dateTime={dateTime}
-        fontColor={fontColor}
-        borderColor={borderColor}
+        {...{
+          defaultRow,
+          startDate,
+          startTime,
+          endTime,
+          intervalMinutes,
+          dateTime,
+          fontColor,
+          borderColor,
+        }}
       />
     </Table>
   );

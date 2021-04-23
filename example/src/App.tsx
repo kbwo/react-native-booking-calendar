@@ -11,6 +11,12 @@ import {
 import { BookingCalendar } from 'react-native-booking-calendar';
 
 const startDate = DateTime.local(2021, 3, 12).setLocale('ja');
+const startTime = new Date();
+startTime.setHours(9);
+startTime.setMinutes(30);
+const endTime = new Date();
+endTime.setHours(19);
+endTime.setMinutes(0);
 
 export default function App() {
   const onButtonPress = (d: DateTime) => {
@@ -50,10 +56,8 @@ export default function App() {
         <BookingCalendar
           defaultRow={defaultRow}
           startDate={startDate}
-          startHour={10}
-          startMinute={0}
-          endHour={19}
-          endMinute={0}
+          startTime={startTime}
+          endTime={endTime}
           intervalMinutes={30}
           dateTime={dateTimeObj}
           backgroundColor="#fff"
